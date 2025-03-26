@@ -8,8 +8,6 @@ import {
   TStudent,
   TUserName,
 } from "./student.interface";
-import config from "../../config";
-import { func } from "joi";
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -105,10 +103,6 @@ const studentSchema = new Schema<TStudent, IStudentModel>(
       unique: true,
       required: [true, "Student is required"],
     },
-    password: {
-      type: String,
-      required: [true, "Password is required sj"],
-    },
     user: {
       type: Schema.Types.ObjectId,
       required: [true, "User id is required"],
@@ -171,6 +165,10 @@ const studentSchema = new Schema<TStudent, IStudentModel>(
       type: localGuardianSchema,
       required: [true, "local guardian information is required"],
     },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: "AcademicSemester",
+    },
     profileImage: {
       type: String,
     },
@@ -201,17 +199,19 @@ studentSchema.statics.isUserExists = async function (id) {
   const existingUser = await Student.findOne({ id });
   return existingUser;
 };
-studentSchema.pre("save", async function () {
+// hasing password
+/* studentSchema.pre("save", async function () {
   const user = this;
   user.password = await bcrypt.hash(
     user.password,
     Number(config.bcrypt_salt_rounds),
   );
-});
-studentSchema.post("save", function (doc, next) {
+}); */
+// hide password from response after saving into database
+/* studentSchema.post("save", function (doc, next) {
   doc.password = "";
   next();
-});
+}); */
 studentSchema.virtual("fullName").get(function () {
   return (
     this.name.firstName + " " + this.name.middleName + " " + this.name.lastName

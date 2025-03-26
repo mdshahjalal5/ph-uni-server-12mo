@@ -1,6 +1,6 @@
 GET  http://localhost:3000/api/v1/students
 GET  http://localhost:3000/api/v1/studentss
-GET  http://localhost:3000/api/v1/students/333333333
+GET  http://localhost:3000/api/v1/students/2030100001
 GET  http://localhost:3000/api/v1/students/33333333
 DELETE  http://localhost:3000/api/v1/students/33333333
 POST http://localhost:3000/api/v1/users/create-student
@@ -15,9 +15,9 @@ Content-Type: application/json
     "middleName": "Michael",
     "lastName": "Doe"
   },
-  "gender": "male3",
+  "gender": "male",
   "dateOfBirth": "2002-05-15",
-  "email": "johndroe@example.com",
+  "email": "johndroe@exampleee.com",
   "contactNo": "+8801712345678",
   "emergencyContactNo": "+8801711122233",
   "bloodGroup": "O+",
@@ -37,8 +37,28 @@ Content-Type: application/json
     "contactNo": "+8801912345678",
     "address": "789 Road, Dhaka, Bangladesh"
   },
+  "admissionSemester":"67e26419a109e195936c63a1",
   "profileImage": "https://example.com/profile.jpg"
 }
 
 }
+
+ ### p: CREATING ACADEMIC SEMESTER 
+
+POST http://localhost:3000/api/v1/academic-semesters/create-academic-semester
+Content-Type: application/json
+{
+  "name": "Fall",
+  "year": "2030",
+  "code": "03",
+  "startMonth": "September",
+  "endMonth": "December"
+}
+
+ ### p: GET ALL ACADEMIC SEMISTER
+
+GET http://localhost:3000/api/v1/academic-semesters/
+
+
+
 
